@@ -36,8 +36,11 @@ function setMarkerForCurrentLocation() {
       console.log(loc.coords);
     },
     (err) => {
-      alert(err.message);
+    //   alert(err.message);
     },
     { enableHighAccuracy: true }
   );
+}
+function setMarkerForLocation(){
+    
 }
