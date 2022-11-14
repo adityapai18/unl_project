@@ -141,25 +141,27 @@
     opacity: 1;
   }
   
-  .fab-action:hover {
-    background-color: #f16100;
+  .fab-action:active {
+    background-color: #386EFA;
+    animation-delay: 2s;
+
   }
   
   .fab-wheel .fab-action-1 {
     right: -1.5rem;
-    top: 0;
+    top: 1rem;
   }
   
   .fab-wheel .fab-action-2 {
     right: 3.0rem;
-    top: 0.5rem;
+    top: 3.5rem;
   }
   .fab-wheel .fab-action-3 {
-    left: 0.7rem;
-    bottom: 3.4rem;
-  }
-  .fab-wheel .fab-action-4 {
-    left: 0.5rem;
+    left: 2.5rem;
     bottom: -1rem;
   }
+  /* .fab-wheel .fab-action-4 {
+    left: 0.5rem;
+    bottom: -1rem;
+  } */
   

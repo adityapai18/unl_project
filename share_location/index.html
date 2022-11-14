@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/unl-map-js@0.0.3/lib/unl-map-js.js"></script>
+    <link href="https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.css" rel="stylesheet" />
+    <link href="https://unpkg.com/unl-map-js@0.0.3/lib/unl-map-js.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+    <script src="../functions.js"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <style>
+        body {
+            overflow-y: hidden;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body class="bg-[#26282C] h-screen">
+    <nav>
+        <div class="container flex w-full justify-between items-center px-4 py-4">
+            <div class="flex">
+                <button class="flex" onclick="window.history.back()">
+                    <span class="material-symbols-outlined text-white text-2xl">
+                        arrow_back_ios
+                    </span>
+                </button>
+                <div class="flex">
+                    <h1 class="text-white text-2xl">Share Location</h1>
+                </div>
+            </div>
+            <span class="material-symbols-outlined text-white text-2xl">
+                search
+            </span>
+        </div>
+    </nav>
+    <div id="map" style="height: 450px">
+        <button onclick="flyToCurLocation()"
+            class="bg-[#26282C] w-[46px] h-[46px] rounded-full flex justify-center items-center absolute top-2.5 right-2 z-10">
+            <span class="material-symbols-outlined text-white"> my_location </span>
+        </button>
+    </div>
+    <div class="flex flex-col gap-6 h-96">
+        <div class="flex gap-3.5 justify-cent px-3 mt-6">
+            <button class="bg-white w-[38px] h-[38px] rounded-full flex justify-center items-center">
+                <span class="material-symbols-outlined"> share_location </span>
+            </button>
+            <div class="text-white">
+                <h1 class="text-2xl">Share Live Location</h1>
+            </div>
+        </div>
+        <hr />
+        <div class="flex gap-3.5 justify-cent px-3">
+            <button class="bg-white w-[38px] h-[38px] rounded-full flex justify-center items-center">
+                <span class="material-symbols-outlined"> pin_drop </span>
+            </button>
+            <div class="text-white">
+                <h1 class="text-2xl">Share your current location</h1>
+            </div>
+        </div>
+    </div>
+    <script>
+        const map = new UnlSdk.Map({
+            apiKey: "biuV9WvyeSBKpj2sKcNrQklQbIcy8bbm",
+            vpmId: "02ff70f8-88ad-42cd-be58-9af7e7574cb9",
+            indoorMapsControl: true,
+            // tilesSelectorControl: true,
+            container: "map",
+            center: [72.8777, 19.076],
+            zoom: 11,
+            minZoom: 2,
+        });
+        setMarkerForCurrentLocation();
+        map.on("click", function (e) {
+            console.log(
+                "A click event has occurred on a visible portion of the poi-label layer at " +
+                e.lngLat
+            );
+        });
+    </script>
+</body>
+
+</html>

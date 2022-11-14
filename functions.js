@@ -36,11 +36,22 @@ function setMarkerForCurrentLocation() {
       console.log(loc.coords);
     },
     (err) => {
-    //   alert(err.message);
+      //   alert(err.message);
     },
     { enableHighAccuracy: true }
   );
 }
-function setMarkerForLocation(){
-    
+function flyToCurLocation() {
+  navigator.geolocation.getCurrentPosition(
+    (loc) => {
+      map.flyTo({
+        center: [loc.coords.longitude, loc.coords.latitude],
+        zoom: 15,
+       });
+    },
+    (err) => {
+      //   alert(err.message);
+    },
+    { enableHighAccuracy: true }
+  );
 }
