@@ -11,7 +11,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
   <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
-  <!-- <script src="./index.js"></script> -->
+  <script src="./index.js"></script>
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
   <title>Document</title>
@@ -24,7 +24,7 @@
         arrow_back_ios
       </span>
       <div class="self-center w-full">
-        <input type="text" class="block p-2.5 w-full z-20 text-m text-gray-900 bg-white-50 rounded border-none"
+        <input onchange="searchFunction(this.value)" type="text" class="block p-2.5 w-full z-20 text-m text-gray-900 bg-white-50 rounded border-none"
           placeholder="Search here" />
       </div>
       <span class="material-symbols-outlined self-center"> mic </span>
@@ -60,8 +60,7 @@
   </div>
   <hr class="mt-3" />
   <div class="mt-3 px-5 py-2 text-white">
-    <h1>Recent</h1>
-    <div class="mt-3 flex flex-col gap-6">
+    <div id="recents" class="mt-3 flex flex-col gap-6">
       <div class="flex gap-5 justify-center">
         <button class="bg-[#5F6368] w-[32px] h-[32px] rounded-full flex justify-center items-center mt-3">
           <span class="material-symbols-outlined text-white"> schedule </span>

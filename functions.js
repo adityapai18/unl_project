@@ -22,32 +22,34 @@
 //     { enableHighAccuracy: true }
 //   );
 // };
-function setMarkerForCurrentLocation() {
-  navigator.geolocation.getCurrentPosition(
-    (loc) => {
-      var popup = new UnlSdk.Popup({ offset: 25 }).setText(
-        "Your Current Location"
-      );
-      var marker = new UnlSdk.Marker()
-        .setLngLat([loc.coords.longitude, loc.coords.latitude])
-        .setPopup(popup)
-        .addTo(map);
-      // // console.log(marker);
-      console.log(loc.coords);
-    },
-    (err) => {
-      //   alert(err.message);
-    },
-    { enableHighAccuracy: true }
-  );
-}
+const setMarkerForCurrentLocation = () =>
+  new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(
+      (loc) => {
+        var popup = new UnlSdk.Popup({ offset: 25 }).setText(
+          "Your Current Location"
+        );
+        var marker = new UnlSdk.Marker()
+          .setLngLat([loc.coords.longitude, loc.coords.latitude])
+          .setPopup(popup)
+          .addTo(map);
+        // // console.log(marker);
+        console.log(loc.coords);
+        resolve(loc.coords);
+      },
+      (err) => {
+        //   alert(err.message);
+      },
+      { enableHighAccuracy: true }
+    );
+  });
 function flyToCurLocation() {
   navigator.geolocation.getCurrentPosition(
     (loc) => {
       map.flyTo({
         center: [loc.coords.longitude, loc.coords.latitude],
         zoom: 15,
-       });
+      });
     },
     (err) => {
       //   alert(err.message);

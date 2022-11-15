@@ -14,6 +14,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <script src="../functions.js"></script>
+    <script src="./index.js"></script>
     <style>
         body {
             overflow-y: hidden;
@@ -141,7 +142,10 @@
             zoom: 11,
             minZoom: 2,
         });
-        setMarkerForCurrentLocation();
+        setMarkerForCurrentLocation().then((startMarker)=>{
+            console.log('startMarker');
+            setDestAndRouteMarker(startMarker);
+        });
         map.on("click", function (e) {
             console.log(
                 "A click event has occurred on a visible portion of the poi-label layer at " +
