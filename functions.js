@@ -29,7 +29,9 @@ const setMarkerForCurrentLocation = () =>
         var popup = new UnlSdk.Popup({ offset: 25 }).setText(
           "Your Current Location"
         );
-        var marker = new UnlSdk.Marker()
+        var marker = new UnlSdk.Marker({
+          color: "red",
+        })
           .setLngLat([loc.coords.longitude, loc.coords.latitude])
           .setPopup(popup)
           .addTo(map);
@@ -43,13 +45,16 @@ const setMarkerForCurrentLocation = () =>
       { enableHighAccuracy: true }
     );
   });
-function flyToCurLocation() {
+function flyToCurLocation(marker) {
   navigator.geolocation.getCurrentPosition(
     (loc) => {
       map.flyTo({
         center: [loc.coords.longitude, loc.coords.latitude],
         zoom: 15,
       });
+      if(marker){
+        marker.setLngLat([loc.coords.longitude, loc.coords.latitude])
+      }
     },
     (err) => {
       //   alert(err.message);
