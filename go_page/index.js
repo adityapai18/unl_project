@@ -1,9 +1,12 @@
 const setDestAndRouteMarker = (startCoords) => {
   var coords = sessionStorage.getItem("dest-loc");
+  var loc_name = sessionStorage.getItem("dest-name");
   if (coords) {
     var marker = new UnlSdk.Marker().setLngLat(coords.split(",")).addTo(map);
     getRouteArray(startCoords, coords);
+    document.getElementById('destination').value = loc_name;
     sessionStorage.removeItem("dest-loc");
+    sessionStorage.removeItem("dest-name");
   }
 };
 const getRouteArray = async (startCoords, endCoords) => {

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/unl-map-js@0.0.3/lib/unl-map-js.js"></script>
+    <link href="https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.css" rel="stylesheet" />
+    <link href="https://unpkg.com/unl-map-js@0.0.3/lib/unl-map-js.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+    <script src="../functions.js"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <title>Document</title>
+    <style>
+        .red-star {
+            color: red;
+        }
+    </style>
+</head>
+
+<body class="bg-[#26282C]">
+    <h1 class="text-2xl text-center text-white my-2">Incident Details</h1>
+    <div class="px-8 pt-8">
+        <label for="inc_type" class="block mb-2 text-l font-medium text-gray-900 dark:text-white">Incident
+            type <span class="red-star">★</span></label>
+        <button type="button" id="dropdownButton"
+            class="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group bg-gray-100 dark:text-white dark:bg-gray-700"
+            aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+            <span class="flex-1 ml-3 text-left whitespace-nowrap" id="spanVal" sidebar-toggle-item>---Select Incident
+                Type--- </span>
+            <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd"></path>
+            </svg>
+        </button>
+        <ul id="dropdown-example" class="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200"
+            aria-labelledby="dropdownRadioButton">
+            <li class="w-full">
+                <div class="flex items-center w-full">
+                    <input id="default-radio-1" type="radio" oninput="setValueOfDrop(this.value)" value="pothole"
+                        name="default-radio"
+                        class="h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                    <label for="default-radio-1"
+                        class="w-full ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Pothole</label>
+                </div>
+            </li>
+            <li class="w-full">
+                <div class="flex items-center w-full">
+                    <input id="default-radio-2" type="radio" oninput="setValueOfDrop(this.value)" value="accidents"
+                        name="default-radio"
+                        class="h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                    <label for="default-radio-2"
+                        class="w-full ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Accidents</label>
+                </div>
+            </li>
+            <li class="w-full">
+                <div class="flex items-center w-full">
+                    <input id="default-radio-3" type="radio" value="streetlights" oninput="setValueOfDrop(this.value)"
+                        name="default-radio"
+                        class="h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                    <label for="default-radio-3"
+                        class="w-full ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Streetlights</label>
+                </div>
+            </li>
+        </ul>
+        <label for="inc_type" class="block mt-2 text-l font-medium text-gray-900 dark:text-white">Incident
+            Location</label>
+        <p class="text-white mb-1">Pin the location of incident <span class="red-star">★</span></p>
+    </div>
+    <div id="map" class="h-48">
+        <button onclick="flyToCurLocation(marker)"
+            class="bg-[#26282C] w-[46px] h-[46px] rounded-full flex justify-center items-center absolute bottom-2.5 right-2 z-10">
+            <span class="material-symbols-outlined text-white"> my_location </span>
+        </button>
+    </div>
+    <div class="px-8 pt-2">
+        <label for="inc_type" class="block mb-2 text-l font-medium text-gray-900 dark:text-white">Description</label>
+        <textarea id="message" rows="4"
+            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Please Give Your Feedback here ..."></textarea>
+        <h1 class="text-2xl text-center text-white my-3">Contact Details</h1>
+        <label for="image" class="block mb-2 text-l font-medium text-gray-900 dark:text-white">Image</label>
+        <input type="file" accept="image/png, image/jpg, image/jpeg">
+        <div class="mt-3">
+            <label for="u_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name <span
+                    class="red-star">★</span></label>
+            <input type="text" id="u_name"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="John" required>
+        </div>
+        <div class="mt-4">
+            <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact
+                number <span class="red-star">★</span></label>
+            <input type="tel" id="phone"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required>
+        </div>
+        <div class="flex justify-between align-center gap-4">
+            <button type="submit" onclick="formSubmit()"
+                class="my-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Report</button>
+            <button type="submit" onclick="window.history.back()"
+                class="my-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Cancel</button>
+        </div>
+    </div>
+    <script>
+        const setValueOfDrop = (value) => {
+            document.getElementById("spanVal").innerHTML = value;
+        }
+        const map = new UnlSdk.Map({
+            apiKey: "biuV9WvyeSBKpj2sKcNrQklQbIcy8bbm",
+            vpmId: "02ff70f8-88ad-42cd-be58-9af7e7574cb9",
+            indoorMapsControl: true,
+            tilesSelectorControl: true,
+            container: "map",
+            center: [72.8777, 19.076],
+            zoom: 11,
+            minZoom: 2,
+        });
+        // setMarkerForCurrentLocation();
+        var marker;
+        navigator.geolocation.getCurrentPosition(
+            (loc) => {
+                marker = new UnlSdk.Marker({
+                    draggable: true,
+                    color: 'red'
+                })
+                    .setLngLat([loc.coords.longitude, loc.coords.latitude])
+                    .addTo(map);
+            },
+            (err) => {
+                //   alert(err.message);
+            },
+            { enableHighAccuracy: true }
+        );
+        async function formSubmit() {
+            var coords = marker.getLngLat();
+            var inc_type;
+            document.getElementsByName('default-radio').forEach(val => {
+                if (val.checked)
+                    inc_type = val.value;
+            })
+            var desc = document.getElementById("message").value;
+            var u_name = document.getElementById("u_name").value;
+            var u_num = document.getElementById("phone").value;
+            const file = document.querySelector('input[type=file]').files[0];
+            if (coords && inc_type && u_name && u_num && file) {
+                var formD = new FormData();
+                formD.append('files', file, file.name);
+                var res = await fetch('http://localhost:5000/admin/upload', {
+                    method: 'POST',
+                    body: formD
+                });
+                var fileRes = await res.json();
+                if (fileRes.status === "SUCCESS") {
+                    var res = await fetch(`https://api.unl.global/v2/geocode/reverse?location=${JSON.stringify({ 'Point': [coords.lng, coords.lat] })}`,
+                        {
+                            headers: {
+                                accept: "application/json",
+                                "x-unl-api-key": "biuV9WvyeSBKpj2sKcNrQklQbIcy8bbm",
+                                "x-unl-vpm-id": "02ff70f8-88ad-42cd-be58-9af7e7574cb9",
+                                "Content-Type": "application/json",
+                            },
+                        });
+                    var apiRes = await res.json();
+                    var geoID = apiRes.features[0].properties.unl_location.id;
+                    if (geoID) {
+                        var res = await fetch('http://localhost:5000/admin/reports/create', {
+                            method: 'POST',
+                            body: JSON.stringify({
+                                "lat": coords.lat.toString(),
+                                "long": coords.lng.toString(),
+                                "img": fileRes.data.uploadSuccess[0].path ? fileRes.data.uploadSuccess[0].path : "",
+                                "text": desc ? desc : "",
+                                "type": inc_type,
+                                "pocnum": u_num,
+                                "pocname": u_name,
+                                "hash": geoID
+                            }),
+                            headers: {
+                                'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicGhvbmUiOiJpN2NkeTA4MWptIiwiaWF0IjoxNjY4Njg5ODg0LCJleHAiOjE2NjkyODk4ODR9.ud2hjSxBDx33iVRTdJ6IYV_WA_mFqWAJN1wzPwd3FPE',
+                                'accept' : 'application/json',
+                                'Content-Type': 'application/json'
+                            }
+                        });
+
+                        var detailsRes = await res.json();
+                        console.log(detailsRes);
+                        if (detailsRes.status === "SUCCESS") {
+                            alert('Your report is submitted successfully');
+                            window.location.href = '../landing_page/';
+                        }
+                        else {
+                            alert("Backend Error");
+                        }
+                    }
+                    else {
+                        alert("API error");
+                    }
+
+                }
+                else {
+                    alert("Upload Error");
+                }
+
+                // console.log(fileStr);
+
+            }
+            else {
+                alert("Required fields are missing")
+            }
+
+        }
+    </script>
+</body>
+
+</html>

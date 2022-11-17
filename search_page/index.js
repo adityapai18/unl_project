@@ -51,6 +51,10 @@ const getDetailsById = async (unlId) => {
     response["geojson:Features"][0]["geojson:geometry"]["coordinates"];
   if (coord) {
     sessionStorage.setItem("dest-loc", coord);
+    sessionStorage.setItem(
+      "dest-name",
+      response["geojson:Features"][0]["geojson:properties"]["vocabulary:name"]
+    );
     window.location.href = "../go_page/";
   }
 };

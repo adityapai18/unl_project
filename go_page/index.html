@@ -25,21 +25,40 @@
 
 <body>
     <nav>
-        <div class="container h-48 flex w-full justify-between px-4 py-4 bg-[#26282C]">
-            <button class="flex" type="button" data-drawer-target="drawer-navigation"
-                data-drawer-show="drawer-navigation" aria-controls="drawer-navigation">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="white">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
-            <div class="flex flex-row">
-                <img src="./profile.png" class="h-[34px] w-[34px] object-contain mr-3" />
-                <button class="bg-white w-[32px] h-[32px] rounded-full flex justify-center items-center">
-                    <span class="material-symbols-outlined"> notifications </span>
-                    <div class="absolute top-3 right-3 bg-[#FF5252] rounded-full p-2 flex justify-center items-center">
-                        <p class="absolute text-white">2</p>
-                    </div>
+        <div class="container  flex flex-col w-full justify-between px-4 py-4 bg-[#26282C]">
+            <div class="flex justify-between">
+                <button class="flex" type="button" data-drawer-target="drawer-navigation"
+                    data-drawer-show="drawer-navigation" aria-controls="drawer-navigation">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24"
+                        stroke="white">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
                 </button>
+                <div class="flex flex-row">
+                    <img src="./profile.png" class="h-[34px] w-[34px] object-contain mr-3" />
+                    <button class="bg-white w-[32px] h-[32px] rounded-full flex justify-center items-center">
+                        <span class="material-symbols-outlined"> notifications </span>
+                        <div
+                            class="absolute top-3 right-3 bg-[#FF5252] rounded-full p-2 flex justify-center items-center">
+                            <p class="absolute text-white">2</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <div class="mt-3 flex justify-center items-center">
+                <div class="rounded-full h-[15px] w-[15px] bg-[#14ABEC] mr-3"></div>
+                <input disabled type="text" id="first_name"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    value="Your location" required>
+            </div>
+            <div class="mt-3 flex justify-center items-center ">
+                <span class="material-symbols-outlined text-sm text-red-700	 mr-3">
+                    location_on
+                </span>
+                <input id="destination" onclick="window.location.href='../search_page/'" type="text" id="first_name"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Your Destination" required>
             </div>
         </div>
         <hamburger-menu id="drawer-navigation"
@@ -142,7 +161,7 @@
             zoom: 11,
             minZoom: 2,
         });
-        setMarkerForCurrentLocation().then((startMarker)=>{
+        setMarkerForCurrentLocation().then((startMarker) => {
             console.log('startMarker');
             setDestAndRouteMarker(startMarker);
         });
