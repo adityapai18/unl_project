@@ -50,7 +50,7 @@ function flyToCurLocation(marker) {
     (loc) => {
       map.flyTo({
         center: [loc.coords.longitude, loc.coords.latitude],
-        zoom: 15,
+        zoom: 20,
       });
       if(marker){
         marker.setLngLat([loc.coords.longitude, loc.coords.latitude])

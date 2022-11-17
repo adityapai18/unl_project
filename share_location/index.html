@@ -38,21 +38,13 @@
             </span>
         </div>
     </nav>
-    <div id="map" style="height: 450px">
+    <div id="map" class="h-[650px] lg:h-96">
         <button onclick="flyToCurLocation(marker)"
             class="bg-[#26282C] w-[46px] h-[46px] rounded-full flex justify-center items-center absolute top-2.5 right-2 z-10">
             <span class="material-symbols-outlined text-white"> my_location </span>
         </button>
     </div>
     <div class="flex flex-col gap-6 h-96">
-        <div class="flex gap-3.5 justify-cent px-3 mt-6">
-            <button class="bg-white w-[38px] h-[38px] rounded-full flex justify-center items-center">
-                <span class="material-symbols-outlined"> share_location </span>
-            </button>
-            <div class="text-white">
-                <h1 class="text-2xl">Share Live Location</h1>
-            </div>
-        </div>
         <hr />
         <div onclick="shareLocation(marker)" class="flex gap-3.5 justify-cent px-3">
             <button class="bg-white w-[38px] h-[38px] rounded-full flex justify-center items-center">

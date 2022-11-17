@@ -31,6 +31,7 @@ const getRouteArray = async (startCoords, endCoords) => {
     }
   );
   var response = await apiRes.json();
+  document.getElementById("eta").innerHTML = "ETA is " + Number(response.overview.duration / 60).toPrecision(2) + " mins";
   if (response.overview.linestring) {
     var pathArray = [];
     response.overview.linestring.map(val=>{
@@ -62,3 +63,29 @@ const getRouteArray = async (startCoords, endCoords) => {
     });
   }
 };
+
+// const getTime = async (startCoords , endCoords ,mode) =>{
+//   var apiRes = await fetch(
+//     "https://api.unl.global/v1/routing?format=coordinates",
+//     {
+//       body: JSON.stringify({
+//         mode: "fast",
+//         waypoints: [
+//           { type: "point", coordinates: `${startCoords.longitude}, ${startCoords.latitude}` },
+//           { type: "point", coordinates: endCoords },
+//         ],
+//         transportMode:mode
+//       }),
+//       headers: {
+//         accept: "application/json",
+//         "Content-Type": "application/json",
+//         "X-Unl-Api-Key": "biuV9WvyeSBKpj2sKcNrQklQbIcy8bbm",
+//         "X-Unl-Vpm-Id": "02ff70f8-88ad-42cd-be58-9af7e7574cb9",
+//       },
+//       method: "POST",
+//     }
+//   );
+//   var res = await apiRes.json();
+//   console.log(res)
+//   return res.overview.duration;
+// }

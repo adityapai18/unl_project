@@ -25,7 +25,7 @@
 
 <body>
     <nav>
-        <div class="container  flex flex-col w-full justify-between px-4 py-4 bg-[#26282C]">
+        <div class=" flex flex-col w-full justify-between px-4 py-4 bg-[#26282C]">
             <div class="flex justify-between">
                 <button class="flex" type="button" data-drawer-target="drawer-navigation"
                     data-drawer-show="drawer-navigation" aria-controls="drawer-navigation">
@@ -36,7 +36,7 @@
                     </svg>
                 </button>
                 <div class="flex flex-row">
-                    <img src="./profile.png" class="h-[34px] w-[34px] object-contain mr-3" />
+                    <!-- <img src="./profile.png" class="h-[34px] w-[34px] object-contain mr-3" /> -->
                     <button class="bg-white w-[32px] h-[32px] rounded-full flex justify-center items-center">
                         <span class="material-symbols-outlined"> notifications </span>
                         <div
@@ -60,6 +60,7 @@
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Your Destination" required>
             </div>
+            <h1 class="text-center text-white mt-2" id="eta"></h1>
         </div>
         <hamburger-menu id="drawer-navigation"
             class="fixed z-40 h-full p-4 overflow-y-auto bg-white w-80 dark:bg-[#26282C]" tabindex="-1"
