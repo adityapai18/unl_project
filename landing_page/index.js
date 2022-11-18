@@ -34,6 +34,9 @@ window.onload = async () => {
   });
   var response = await res.json();
   var potholeArr = [];
+  var manholeArr = [];
+  var accArr = [];
+  var lightArr = [];
   response.data.data.map((val) => {
     if (val.type === "pothole") {
       potholeArr.push({
@@ -44,11 +47,60 @@ window.onload = async () => {
         },
         properties: {},
       });
-      var popup = new UnlSdk.Popup({ offset: 25 }).setText(
-        "potholes"
-      );
+      var popup = new UnlSdk.Popup({ offset: 25 }).setText("pothole");
       new UnlSdk.Marker({
-        color: "yellow",
+        color: "#6fd1e2",
+      })
+        .setLngLat([val.long, val.lat])
+        .setPopup(popup)
+        .addTo(map);
+    }
+    if (val.type === "manholes") {
+      manholeArr.push({
+        type: "Feature",
+        geometry: {
+          type: "Point",
+          coordinates: [val.long, val.lat],
+        },
+        properties: {},
+      });
+      var popup = new UnlSdk.Popup({ offset: 25 }).setText("manhole");
+      new UnlSdk.Marker({
+        color: "#0e6fc6",
+      })
+        .setLngLat([val.long, val.lat])
+        .setPopup(popup)
+        .addTo(map);
+    }
+    if (val.type === "accidents") {
+      accArr.push({
+        type: "Feature",
+        geometry: {
+          type: "Point",
+          coordinates: [val.long, val.lat],
+        },
+        properties: {},
+      });
+      var popup = new UnlSdk.Popup({ offset: 25 }).setText("accident");
+      new UnlSdk.Marker({
+        color: "#f77c5e",
+      })
+        .setLngLat([val.long, val.lat])
+        .setPopup(popup)
+        .addTo(map);
+    }
+    if (val.type === "streetlights") {
+      lightArr.push({
+        type: "Feature",
+        geometry: {
+          type: "Point",
+          coordinates: [val.long, val.lat],
+        },
+        properties: {},
+      });
+      var popup = new UnlSdk.Popup({ offset: 25 }).setText("streetlight");
+      new UnlSdk.Marker({
+        color: "#f7d25e",
       })
         .setLngLat([val.long, val.lat])
         .setPopup(popup)
@@ -70,6 +122,27 @@ window.onload = async () => {
         data: {
           type: "FeatureCollection",
           features: potholeArr,
+        },
+      });
+      map.addSource("streetlight", {
+        type: "geojson",
+        data: {
+          type: "FeatureCollection",
+          features: lightArr,
+        },
+      });
+      map.addSource("accident", {
+        type: "geojson",
+        data: {
+          type: "FeatureCollection",
+          features: accArr,
+        },
+      });
+      map.addSource("manhole", {
+        type: "geojson",
+        data: {
+          type: "FeatureCollection",
+          features: manholeArr,
         },
       });
       // map.addLayer({

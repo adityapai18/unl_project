@@ -4,6 +4,15 @@ const shareLocation = (marker) => {
 
   var loc = coords.lng.toString() + "," + coords.lat.toString();
   loc = window.btoa(loc);
-  navigator.share({url:window.location.origin + "/landing_page/?loc=" + loc});
+  if (window.location.protocol != "https:") {
+    navigator.share({
+      url: window.location.origin + "/landing_page/?loc=" + loc,
+    });
+  } else {
+    navigator.share({
+      url: window.location.origin + "/url_project/landing_page/?loc=" + loc,
+    });
+  }
+
   // console.log(window.location.origin);
 };
