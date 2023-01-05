@@ -10,7 +10,7 @@ const shareLocation = (marker) => {
     });
   } else {
     navigator.share({
-      url: window.location.origin + "/url_project/landing_page/?loc=" + loc,
+      url: window.location.origin + "/unl_project/landing_page/?loc=" + loc,
     });
   }
 
